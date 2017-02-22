@@ -1,19 +1,13 @@
-<html>
-    <head>
-        <title>Django Girls blog</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="">Django Girls Blog</a></h1>
-        </div>
 
-{% for post in posts %}
-        <div>
+{% extends 'blog/base.html' %}
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
             <p>published: {{post.published_date}}</p>
-            <h2><a href="">{{post.title }}</a></h2>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{post.title }}</a></h2> <!-- pk=post.pk = pk is primary key
+             because we didn't specify any primary key in our model, django automatically assigned ID to our post-->
             <p>{{ post.text|linebreaksbr }}</p>
         </div>
-{% endfor %}
+    {% endfor %}
 
-    </body>
-</html>
+{% endblock %}
